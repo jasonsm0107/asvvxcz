@@ -1,0 +1,100 @@
+<svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="500" height="500" fill="#f9fafc" rx="20" ry="20"/>
+  
+  <!-- Decorative elements -->
+  <g opacity="0.6">
+    <circle cx="60" cy="60" r="20" fill="#037ffc" opacity="0.2"/>
+    <circle cx="440" cy="80" r="30" fill="#e303fc" opacity="0.2"/>
+    <circle cx="420" cy="420" r="25" fill="#037ffc" opacity="0.2"/>
+    <circle cx="80" cy="440" r="15" fill="#e303fc" opacity="0.2"/>
+  </g>
+  
+  <!-- Central Concept Visualization -->
+  <g transform="translate(250, 250)">
+    <!-- Outer ring - blockchain network -->
+    <circle cx="0" cy="0" r="150" fill="none" stroke="#e0e5eb" stroke-width="10" stroke-dasharray="20,10">
+      <animate attributeName="stroke-dashoffset" from="0" to="60" dur="10s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Middle ring - encryption layer -->
+    <circle cx="0" cy="0" r="110" fill="none" stroke="url(#gradientPrimary)" stroke-width="5" opacity="0.7">
+      <animate attributeName="r" values="110;115;110" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.7;0.9;0.7" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Inner shape - user privacy -->
+    <path d="M0,-70 L60,40 L-60,40 Z" fill="url(#gradientSecondary)">
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="30s" repeatCount="indefinite"/>
+    </path>
+    
+    <!-- User icon at center -->
+    <circle cx="0" cy="0" r="40" fill="white" stroke="#151934" stroke-width="4"/>
+    <circle cx="0" cy="-15" r="15" fill="#151934"/>
+    <path d="M-30,25 Q0,50 30,25" fill="none" stroke="#151934" stroke-width="4" stroke-linecap="round"/>
+    
+    <!-- Connection nodes -->
+    <g id="nodes">
+      <!-- Node 1 -->
+      <g transform="rotate(30) translate(0, -150)">
+        <circle cx="0" cy="0" r="12" fill="white" stroke="#e303fc" stroke-width="3"/>
+        <circle cx="0" cy="0" r="5" fill="#e303fc"/>
+      </g>
+      
+      <!-- Node 2 -->
+      <g transform="rotate(90) translate(0, -150)">
+        <circle cx="0" cy="0" r="12" fill="white" stroke="#037ffc" stroke-width="3"/>
+        <circle cx="0" cy="0" r="5" fill="#037ffc"/>
+      </g>
+      
+      <!-- Node 3 -->
+      <g transform="rotate(150) translate(0, -150)">
+        <circle cx="0" cy="0" r="12" fill="white" stroke="#e303fc" stroke-width="3"/>
+        <circle cx="0" cy="0" r="5" fill="#e303fc"/>
+      </g>
+      
+      <!-- Node 4 -->
+      <g transform="rotate(210) translate(0, -150)">
+        <circle cx="0" cy="0" r="12" fill="white" stroke="#037ffc" stroke-width="3"/>
+        <circle cx="0" cy="0" r="5" fill="#037ffc"/>
+      </g>
+      
+      <!-- Node 5 -->
+      <g transform="rotate(270) translate(0, -150)">
+        <circle cx="0" cy="0" r="12" fill="white" stroke="#e303fc" stroke-width="3"/>
+        <circle cx="0" cy="0" r="5" fill="#e303fc"/>
+      </g>
+      
+      <!-- Node 6 -->
+      <g transform="rotate(330) translate(0, -150)">
+        <circle cx="0" cy="0" r="12" fill="white" stroke="#037ffc" stroke-width="3"/>
+        <circle cx="0" cy="0" r="5" fill="#037ffc"/>
+      </g>
+      
+      <animateTransform attributeName="transform" type="rotate" from="0" to="-360" dur="60s" repeatCount="indefinite"/>
+    </g>
+    
+    <!-- Lock icon symbolizing privacy -->
+    <g transform="translate(0, 85)">
+      <rect x="-15" y="0" width="30" height="25" rx="5" ry="5" fill="url(#gradientPrimary)"/>
+      <path d="M-8,-15 L-8,0 M8,-15 L8,0" stroke="url(#gradientPrimary)" stroke-width="5" stroke-linecap="round"/>
+      <circle cx="0" cy="12" r="5" fill="white"/>
+    </g>
+  </g>
+  
+  <!-- Defs for gradients -->
+  <defs>
+    <linearGradient id="gradientPrimary" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#037ffc"/>
+      <stop offset="100%" stop-color="#03c2fc"/>
+    </linearGradient>
+    
+    <linearGradient id="gradientSecondary" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e303fc"/>
+      <stop offset="100%" stop-color="#fc03c2"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Title -->
+  <text x="250" y="50" text-anchor="middle" fill="#151934" font-family="Arial" font-weight="bold" font-size="22">CryptoWave Anonymity Protection</text>
+</svg>

@@ -1,0 +1,49 @@
+<svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="500" height="500" fill="#f9fafc" rx="20" ry="20"/>
+  
+  <!-- Main graphics - stylized chart -->
+  <g transform="translate(50, 100)">
+    <!-- Grid lines -->
+    <line x1="0" y1="250" x2="400" y2="250" stroke="#e0e5eb" stroke-width="2"/>
+    <line x1="0" y1="125" x2="400" y2="125" stroke="#e0e5eb" stroke-width="2"/>
+    <line x1="0" y1="0" x2="400" y2="0" stroke="#e0e5eb" stroke-width="2"/>
+    
+    <!-- Y-axis labels -->
+    <text x="-10" y="250" text-anchor="end" fill="#8a94a6" font-family="Arial" font-size="14">0%</text>
+    <text x="-10" y="125" text-anchor="end" fill="#8a94a6" font-family="Arial" font-size="14">0.15%</text>
+    <text x="-10" y="0" text-anchor="end" fill="#8a94a6" font-family="Arial" font-size="14">0.3%</text>
+    
+    <!-- Bars -->
+    <g transform="translate(75, 0)">
+      <!-- CryptoWave Bar -->
+      <rect x="0" y="208" width="80" height="42" fill="#037ffc" rx="5" ry="5">
+        <animate attributeName="y" from="250" to="208" dur="1s" begin="0.2s" fill="freeze" calcMode="spline" keySplines="0.42 0 0.58 1"/>
+        <animate attributeName="height" from="0" to="42" dur="1s" begin="0.2s" fill="freeze" calcMode="spline" keySplines="0.42 0 0.58 1"/>
+      </rect>
+      <text x="40" y="290" text-anchor="middle" fill="#151934" font-family="Arial" font-weight="bold" font-size="16">CryptoWave</text>
+      <text x="40" y="195" text-anchor="middle" fill="white" font-family="Arial" font-weight="bold" font-size="16">0.05%</text>
+    </g>
+    
+    <g transform="translate(245, 0)">
+      <!-- Competitor Bar -->
+      <rect x="0" y="42" width="80" height="208" fill="#e303fc" rx="5" ry="5">
+        <animate attributeName="y" from="250" to="42" dur="1s" begin="0.5s" fill="freeze" calcMode="spline" keySplines="0.42 0 0.58 1"/>
+        <animate attributeName="height" from="0" to="208" dur="1s" begin="0.5s" fill="freeze" calcMode="spline" keySplines="0.42 0 0.58 1"/>
+      </rect>
+      <text x="40" y="290" text-anchor="middle" fill="#151934" font-family="Arial" font-weight="bold" font-size="16">Competitors</text>
+      <text x="40" y="30" text-anchor="middle" fill="white" font-family="Arial" font-weight="bold" font-size="16">0.25%</text>
+    </g>
+  </g>
+  
+  <!-- Decoration elements -->
+  <g opacity="0.6">
+    <circle cx="50" cy="50" r="20" fill="#037ffc" opacity="0.2"/>
+    <circle cx="450" cy="100" r="30" fill="#e303fc" opacity="0.2"/>
+    <circle cx="400" cy="450" r="25" fill="#037ffc" opacity="0.2"/>
+    <circle cx="100" cy="420" r="15" fill="#e303fc" opacity="0.2"/>
+  </g>
+  
+  <!-- Chart title -->
+  <text x="250" y="50" text-anchor="middle" fill="#151934" font-family="Arial" font-weight="bold" font-size="22">Trading Fee Comparison</text>
+</svg>

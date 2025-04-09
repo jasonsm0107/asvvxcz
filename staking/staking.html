@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wave Finance | Staking Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3B82F6;
+            --primary-dark: #2563EB;
+            --primary-light: #93C5FD;
+            --secondary: #10B981;
+            --secondary-dark: #059669;
+            --accent: #8B5CF6;
+            --background: #0F172A;
+            --background-light: #1E293B;
+            --background-lighter: #334155;
+            --text: #F8FAFC;
+            --text-secondary: #CBD5E1;
+            --border: #475569;
+            --success: #22C55E;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(8px);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            padding: 1.2rem 5%;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 36px;
+        }
+
+        .logo span {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-left: 0.75rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--text);
+        }
+
+        nav a.active {
+            color: var(--text);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: var(--text);
+            border: none;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200vh;
+            height: 200vh;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, rgba(59, 130, 246, 0.08) 0%, rgba(139, 92, 246, 0.05) 25%, transparent 70%);
+            top: -100vh;
+            left: -100vh;
+            z-index: 0;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            z-index: 1;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-title span {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 90%;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .hero-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .staking-card {
+            background: var(--background-light);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .staking-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to right,
+                rgba(59, 130, 246, 0.1),
+                rgba(139, 92, 246, 0.1),
+                rgba(16, 185, 129, 0.1),
+                rgba(59, 130, 246, 0.1)
+            );
+            transform: rotate(-45deg);
+            animation: card-gradient 10s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes card-gradient {
+            0% {
+                transform: rotate(-45deg) translateX(-30%);
+            }
+            50% {
+                transform: rotate(-45deg) translateX(30%);
+            }
+            100% {
+                transform: rotate(-45deg) translateX(-30%);
+            }
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-title .badge {
+            font-size: 0.75rem;
+            background-color: rgba(16, 185, 129, 0.2);
+            color: var(--secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            border: 1px solid var(--border);
+            background-color: var(--background-lighter);
+            color: var(--text);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .input-wrapper input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+        }
+
+        .input-wrapper .max-btn {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(59, 130, 246, 0.2);
+            color: var(--primary);
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .input-wrapper .max-btn:hover {
+            background-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .balance-display {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .staking-details {
+            background-color: var(--background);
+            border-radius: 1rem;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .detail-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-icon {
+            width: 14px;
+            height: 14px;
+            margin-left: 0.5rem;
+            cursor: help;
+            opacity: 0.7;
+            transition: var(--transition);
+        }
+
+        .info-icon:hover {
+            opacity: 1;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .highlight {
+            color: var(--secondary);
+        }
+
+        .warning {
+            color: var(--warning);
+        }
+
+        .btn-stake {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            border: none;
+            border-radius: 0.75rem;
+            color: var(--text);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 1rem;
+        }
+
+        .btn-stake:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-stake:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .glow-orbs {
+            position: absolute;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+        }
+
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+            background-color: rgba(59, 130, 246, 0.15);
+            top: -100px;
+            right: -50px;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background-color: rgba(139, 92, 246, 0.1);
+            bottom: -150px;
+            left: -100px;
+        }
+
+        .staking-pools {
+            padding: 6rem 5%;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .pools-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .pool-card {
+            background-color: var(--background-light);
+            border: 1px solid var(--border);
+            border-radius: 1.25rem;
+            padding: 2rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pool-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-light);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
+        }
+
+        .pool-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .pool-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+
+        .pool-icon img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .pool-name {
+            flex: 1;
+        }
+
+        .pool-name h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .pool-name span {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .pool-stats {
+            margin-top: 1.5rem;
+        }
+
+        .pool-stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--background-lighter);
+        }
+
+        .pool-stat-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .pool-stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .pool-stat-value {
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .pool-actions {
+            margin-top: 1.5rem;
+        }
+
+        .btn-pool {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .analytics {
+            padding: 6rem 5%;
+            background-color: var(--background-light);
+            position: relative;
+        }
+
+        .analytics-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .analytics-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .analytics-card {
+            background-color: var(--background);
+            border-radius: 1.25rem;
+            padding: 1.5rem;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+        }
+
+        .analytics-card:hover {
+            border-color: var(--primary-light);
+        }
+
+        .analytics-card-title {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .analytics-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .analytics-trend {
+            display: flex;
+            align-items: center;
+            font-size: 0.875rem;
+        }
+
+        .trend-up {
+            color: var(--success);
+        }
+
+        .trend-down {
+            color: var(--error);
+        }
+
+        .trend-icon {
+            margin-right: 0.25rem;
+        }
+
+        .chart-container {
+            background-color: var(--background);
+            border-radius: 1.25rem;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            height: 400px;
+            position: relative;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .chart-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .chart-controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .chart-control {
+            background-color: var(--background-lighter);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .chart-control:hover,
+        .chart-control.active {
+            background-color: var(--primary);
+            color: var(--text);
+            border-color: var(--primary);
+        }
+
+        .chart {
+            height: calc(100% - 60px);
+        }
+
+        .faq {
+            padding: 6rem 5%;
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .accordion {
+            margin-top: 3rem;
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 1rem;
+        }
+
+        .accordion-header {
+            padding: 1.25rem 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .accordion-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .accordion-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: var(--background-lighter);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .accordion-item.open .accordion-icon {
+            background-color: var(--primary);
+            transform: rotate(45deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .accordion-item.open .accordion-content {
+            max-height: 500px;
+            padding-bottom: 1.5rem;
+        }
+
+        .accordion-body {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            padding-right: 2rem;
+        }
+
+        .footer {
+            background-color: var(--background-light);
+            padding: 4rem 5% 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 1.5fr repeat(3, 1fr);
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo img {
+            height: 32px;
+        }
+
+        .footer-logo span {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-left: 0.75rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--background-lighter);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .social-link svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--text);
+        }
+
+        .footer-nav h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+
+        .footer-nav ul {
+            list-style: none;
+        }
+
+        .footer-nav li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.875rem;
+        }
+
+        .footer-nav a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .legal-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .legal-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: var(--transition);
+        }
+
+        .legal-links a:hover {
+            color: var(--text);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: 2rem 3rem;
+            }
+
+            .pools-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .animate-pulse {
+            animation: pulse 3s infinite;
+        }
+
+        .animate-float {
+            animation: float 6s infinite ease-in-out;
+        }
+
+        /* Staggered animations */
+        .animate-delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .animate-delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .animate-delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            position: relative;
+            width: 80px;
+            height: 20px;
+        }
+
+        .loading div {
+            position: absolute;
+            top: 0;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: var(--primary);
+            animation-timing-function: cubic-bezier(0, 1, 1, 0);
+        }
+
+        .loading div:nth-child(1) {
+            left: 8px;
+            animation: loading1 0.6s infinite;
+        }
+
+        .loading div:nth-child(2) {
+            left: 8px;
+            animation: loading2 0.6s infinite;
+        }
+
+        .loading div:nth-child(3) {
+            left: 32px;
+            animation: loading2 0.6s infinite;
+        }
+
+        .loading div:nth-child(4) {
+            left: 56px;
+            animation: loading3 0.6s infinite;
+        }
+
+        @keyframes loading1 {
+            0% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes loading3 {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(0);
+            }
+        }
+
+        @keyframes loading2 {
+            0% {
+                transform: translate(0, 0);
+            }
+            100% {
+                transform: translate(24px, 0);
+            }
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: var(--background-lighter);
+            color: var(--text);
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.75rem;
+            box-shadow: var(--shadow-md);
+            pointer-events: none;
+        }
+
+        .tooltip .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: var(--background-lighter) transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Switch toggle */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 48px;
+            height: 26px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--background-lighter);
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 3px;
+            bottom: 3px;
+            background-color: var(--text);
+            -webkit-transition: .4s;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary);
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px var(--primary);
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(22px);
+            -ms-transform: translateX(22px);
+            transform: translateX(22px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="https://placehold.co/36x36/3B82F6/FFF?text=W" alt="Wave Finance Logo">
+                <span>Wave Finance</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#" class="active">Staking</a></li>
+                    <li><a href="#">Swap</a></li>
+                    <li><a href="#">Pools</a></li>
+                    <li><a href="#">Analytics</a></li>
+                    <li><a href="#">Governance</a></li>
+                </ul>
+            </nav>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-outline">Connect Wallet</a>
+                <a href="#" class="btn btn-primary">Sign Up</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content animate-fade-in">
+                <h1 class="hero-title">Maximize Your Yield With <span>Secure Staking</span></h1>
+                <p class="hero-subtitle">Stake your assets to earn passive income with competitive APYs and flexible locking periods. Safe, secure, and transparent.</p>
+                <div class="hero-cta">
+                    <a href="#" class="btn btn-primary">Start Staking</a>
+                    <a href="#" class="btn btn-outline">Learn More</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item animate-fade-in animate-delay-1">
+                        <span class="stat-value">$1.2B+</span>
+                        <span class="stat-label">Total Value Locked</span>
+                    </div>
+                    <div class="stat-item animate-fade-in animate-delay-2">
+                        <span class="stat-value">120K+</span>
+                        <span class="stat-label">Active Stakers</span>
+                    </div>
+                    <div class="stat-item animate-fade-in animate-delay-3">
+                        <span class="stat-value">24%</span>
+                        <span class="stat-label">Average APY</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual animate-fade-in">
+                <div class="staking-card animate-float">
+                    <div class="card-title">
+                        <span>Stake Your Tokens</span>
+                        <span class="badge">High Yield</span>
+                    </div>
+                    <div class="input-group">
+                        <label for="token-amount">Amount</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="token-amount" placeholder="0.0">
+                            <button class="max-btn">MAX</button>
+                        </div>
+                        <div class="balance-display">
+                            <span>Balance: 1,234.56 WAVE</span>
+                            <span>≈ $12,345.67</span>
+                        </div>
+                    </div>
+                    <div class="staking-details">
+                        <div class="detail-row">
+                            <span class="detail-label">
+                                Lock period
+                                <span class="tooltip">
+                                    <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="tooltip-text">The period your tokens will be locked for earning rewards</span>
+                                </span>
+                            </span>
+                            <span class="detail-value">30 days</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">APY</span>
+                            <span class="detail-value highlight">24.8%</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Rewards estimation</span>
+                            <span class="detail-value">+ 83.5 WAVE / month</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Early withdrawal fee</span>
+                            <span class="detail-value warning">5%</span>
+                        </div>
+                    </div>
+                    <button class="btn-stake">Stake Now</button>
+                </div>
+                <div class="glow-orbs">
+                    <div class="glow-orb orb-1"></div>
+                    <div class="glow-orb orb-2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Staking Pools Section -->
+    <section class="staking-pools">
+        <div class="section-header animate-fade-in">
+            <h2 class="section-title">Choose Your Staking Strategy</h2>
+            <p class="section-description">Select from various pools with different token pairs, risk levels, and reward structures to match your investment goals.</p>
+        </div>
+        <div class="pools-container">
+            <!-- Pool Card 1 -->
+            <div class="pool-card animate-fade-in animate-delay-1">
+                <div class="pool-header">
+                    <div class="pool-icon">
+                        <img src="https://placehold.co/30x30/3B82F6/FFF?text=W" alt="WAVE Token">
+                    </div>
+                    <div class="pool-name">
+                        <h3>WAVE Single Staking</h3>
+                        <span>Low risk</span>
+                    </div>
+                </div>
+                <div class="pool-stats">
+                    <div class="pool-stat-row">
+                        <span class="pool-stat-label">APY</span>
+                        <span class="pool-stat-value highlight">18.5%</span>
+                    </div>
+                    <div class="pool-stat-row">
+                        <span class="pool-stat-label">Lock period</span>
+                        <span class="pool-stat-value">30 days</span>
+                    </div>
+                    <div class="pool-stat-row">
+                        <span class="pool-stat-label">Total staked</span>
+                        <span class="pool-stat-value">$432M</span>
+                    </div>
+                    <div class="pool-stat-row">
+                        <span class="pool-stat-label">Your stake</span>
+                        <span class="pool-stat-value">0 WAVE</span>
+                    </div>
+                </div>
+                <div class="pool-actions">
+                    <button class="btn btn-primary btn-pool">Stake WAVE</button>
+                </div>
+            </div>
+
+            <!-- Pool Card 2 -->
+            <div class="pool-card animate-fade-in animate-delay-2">
+                <div class="pool-header">
+                    <div class="pool-icon">
+                        <img src="https://placehold.co/30x30/10B981/FFF?text=LP" alt="Liquidity Pool">
+                    </div>
+                    <div class="pool-name">
+                        <h3>WAVE-ETH LP</h3>
+                        <span>Medium risk</span>
+                    </div>
+                </div>
+                <div class="pool-stats">
+                    <div class="pool-stat-row">
+                        <span class="pool-stat-label">APY</span>
+                        <span class="pool-stat-value highlight">32.4%</span>
+                    </div>
+                    <div class="pool-stat-row">
+                        <span class="pool-stat-label">Lock period</span>
+                        <span class="pool-stat-value">90 days</span>
+                    </div>
+                    <div class="pool-stat-row">
+                        <span class="pool-stat-label">Total staked</span>
+                        <span class="pool-stat-value">$298M</span>
+                    </div>
+                    <div class="pool-stat-row">
+                        <span class="pool-stat-label">Your stake</span>
+                        <span class="pool-stat-value">0 LP</span>
+                    </div>
+                </div>
+                <div class="pool-actions">
+                    <button class="btn btn-primary btn-pool">Stake LP</button>
+                </div>
+            </div>
+
+            <!-- Pool Card 3 -->
+            <div class="pool-card animate-fade-in animate-delay-3">
+                <div class="pool-header">
+                    <div class="pool-icon">
+                        <img src="https://placehold.co/30x30/8B5CF6/FFF?text=VX" alt="vxWAVE">
+                    </div>
+                    <div class="pool-name">
+                        <h3>vxWAVE Staking</h3>
+                        <span>High yield</span>
+                    </div>
+                </div>
+                <div class="pool-stats">
+                    <div class="pool-stat-row">
+                        <span class="pool-stat-label">APY</span>
+                        <span class="pool-stat-value highlight">48.7%</span>
+                    </div>
+                    <div class="pool-stat-row">
+                        <span class="pool-stat-label">Lock period</span>
+                        <span class="pool-stat-value">180 days</span>
+                    </div>
+                    <div class="pool-stat-row">
+                        <span class="pool-stat-label">Total staked</span>
+                        <span class="pool-stat-value">$105M</span>
+                    </div>
+                    <div class="pool-stat-row">
+                        <span class="pool-stat-label">Your stake</span>
+                        <span class="pool-stat-value">0 vxWAVE</span>
+                    </div>
+                </div>
+                <div class="pool-actions">
+                    <button class="btn btn-primary btn-pool">Stake vxWAVE</button>
+                </div>
+            </div>
+
+            <!-- Pool Card 4 -->
+            <div class="pool-card animate-fade-in animate-delay-1">
+                <div class="pool-header">
+                    <div class="pool-icon">
+                        <img src="https://placehold.co/30x30/EF4444/FFF?text=BTC" alt="BTC">
+                    </div>
+                    <div class="pool-name">
+                        <h3>WAVE-BTC LP</h3>
+                        <span>Medium risk</span>
+                    </div>
+                </div>
+                <div class="pool-stats">
+                    <div class="pool-stat-row">
+                        <span class="pool-stat-label">APY</span>
+                        <span class="pool-stat-value highlight">28.9%</span>
+                    </div>
+                    <div class="pool-stat-row">
+                        <span class="pool-stat-label">Lock period</span>
+                        <span class="pool-stat-value">60 days</span>
+                    </div>
+                    <div class="pool-stat-row">
+                        <span class="pool-stat-label">Total staked</span>
+                        <span class="pool-stat-value">$187M</span>
+                    </div>
+                    <div class="pool-stat-row">
+                        <span class="pool-stat-label">Your stake</span>
+                        <span class="pool-stat-value">0 LP</span>
+                    </div>
+                </div>
+                <div class="pool-actions">
+                    <button class="btn btn-primary btn-pool">Stake LP</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analytics Section -->
+    <section class="analytics">
+        <div class="section-header animate-fade-in">
+            <h2 class="section-title">Real-time Staking Analytics</h2>
+            <p class="section-description">Track performance metrics, historical yields, and market trends to make informed decisions.</p>
+        </div>
+        <div class="analytics-container">
+            <div class="analytics-cards">
+                <!-- Analytics Card 1 -->
+                <div class="analytics-card animate-fade-in">
+                    <div class="analytics-card-title">
+                        Total Value Locked (TVL)
+                        <span class="tooltip">
+                            <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+                            </svg>
+                            <span class="tooltip-text">The total value of all assets locked in staking pools</span>
+                        </span>
+                    </div>
+                    <div class="analytics-value">$1,232,456,789</div>
+                    <div class="analytics-trend trend-up">
+                        <span class="trend-icon">↑</span>
+                        <span>12.4% (24h)</span>
+                    </div>
+                </div>
+
+                <!-- Analytics Card 2 -->
+                <div class="analytics-card animate-fade-in animate-delay-1">
+                    <div class="analytics-card-title">
+                        Average APY
+                    </div>
+                    <div class="analytics-value">24.8%</div>
+                    <div class="analytics-trend trend-up">
+                        <span class="trend-icon">↑</span>
+                        <span>3.2% (24h)</span>
+                    </div>
+                </div>
+
+                <!-- Analytics Card 3 -->
+                <div class="analytics-card animate-fade-in animate-delay-2">
+                    <div class="analytics-card-title">
+                        WAVE Price
+                    </div>
+                    <div class="analytics-value">$12.47</div>
+                    <div class="analytics-trend trend-up">
+                        <span class="trend-icon">↑</span>
+                        <span>5.7% (24h)</span>
+                    </div>
+                </div>
+
+                <!-- Analytics Card 4 -->
+                <div class="analytics-card animate-fade-in animate-delay-3">
+                    <div class="analytics-card-title">
+                        Active Stakers
+                    </div>
+                    <div class="analytics-value">124,567</div>
+                    <div class="analytics-trend trend-up">
+                        <span class="trend-icon">↑</span>
+                        <span>856 new (24h)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Container -->
+            <div class="chart-container animate-fade-in">
+                <div class="chart-header">
+                    <h3 class="chart-title">TVL & APY History</h3>
+                    <div class="chart-controls">
+                        <button class="chart-control active">1D</button>
+                        <button class="chart-control">1W</button>
+                        <button class="chart-control">1M</button>
+                        <button class="chart-control">3M</button>
+                        <button class="chart-control">1Y</button>
+                        <button class="chart-control">All</button>
+                    </div>
+                </div>
+                <div class="chart">
+                    <!-- Chart will be rendered here by JavaScript -->
+                    <img src="https://placehold.co/1200x300/334155/CBD5E1?text=Interactive+Chart+Will+Be+Rendered+Here" alt="TVL & APY Chart" style="width: 100%; height: 100%; object-fit: cover; border-radius: 0.5rem;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="section-header animate-fade-in">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-description">Get answers to common questions about our staking platform.</p>
+        </div>
+        <div class="faq-container">
+            <div class="accordion">
+                <!-- FAQ Item 1 -->
+                <div class="accordion-item animate-fade-in open">
+                    <div class="accordion-header">
+                        <h3 class="accordion-title">What is staking?</h3>
+                        <div class="accordion-icon">+</div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Staking is a process where you lock your cryptocurrency assets for a specific period to support the operations of a blockchain network. In return, you receive rewards in the form of additional tokens. It's similar to earning interest in a traditional bank account, but typically offers higher yields. Wave Finance provides various staking options with different risk levels and reward structures to match your investment preferences.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="accordion-item animate-fade-in animate-delay-1">
+                    <div class="accordion-header">
+                        <h3 class="accordion-title">How are staking rewards calculated?</h3>
+                        <div class="accordion-icon">+</div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Staking rewards are calculated based on several factors including the amount staked, the duration of staking, the specific pool's APY (Annual Percentage Yield), and the network's overall staking participation. The APY shown for each pool represents the annualized return you can expect if you stake for a full year. Rewards are typically distributed on a daily or weekly basis, depending on the pool you choose.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="accordion-item animate-fade-in animate-delay-2">
+                    <div class="accordion-header">
+                        <h3 class="accordion-title">Is there a minimum amount required to stake?</h3>
+                        <div class="accordion-icon">+</div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Yes, most staking pools have a minimum staking requirement to ensure efficient operation and security of the network. The minimum amount varies depending on the pool and token type. For WAVE single staking, the minimum amount is 10 WAVE. For LP token staking, the minimum is the equivalent of $50 in LP tokens. These requirements help prevent spam transactions and ensure participants have a meaningful stake in the network's success.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="accordion-item animate-fade-in animate-delay-3">
+                    <div class="accordion-header">
+                        <h3 class="accordion-title">Can I withdraw my staked tokens before the lock period ends?</h3>
+                        <div class="accordion-icon">+</div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Yes, you can withdraw your staked tokens before the lock period ends, but an early withdrawal fee will be applied. This fee varies depending on the staking pool and how early you withdraw. For most pools, the fee ranges from 3% to 10% of your staked amount. The fee is designed to encourage long-term staking and maintain the stability of the protocol. To avoid these fees, we recommend selecting a lock period that aligns with your investment timeline.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="accordion-item animate-fade-in animate-delay-3">
+                    <div class="accordion-header">
+                        <h3 class="accordion-title">Are there any risks involved with staking?</h3>
+                        <div class="accordion-icon">+</div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            While staking is generally considered less risky than active trading, there are still potential risks to be aware of. These include smart contract risks, impermanent loss (for LP staking), market volatility, and regulatory changes. Wave Finance conducts regular security audits and implements robust security measures to minimize these risks, but it's important to understand that all crypto investments carry some level of risk. We recommend diversifying your portfolio and only staking amounts you can afford to lock for the selected period.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 6 -->
+                <div class="accordion-item animate-fade-in animate-delay-3">
+                    <div class="accordion-header">
+                        <h3 class="accordion-title">How can I maximize my staking rewards?</h3>
+                        <div class="accordion-icon">+</div>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            To maximize your staking rewards, consider strategies like selecting longer lock periods for higher APYs, participating in special staking events, compounding your rewards by re-staking them, diversifying across different pools, and staying informed about protocol updates and governance proposals. Additionally, holding vxWAVE tokens can boost your staking rewards by up to 2.5x in certain pools. Our analytics dashboard provides valuable insights to help you optimize your staking strategy based on market conditions and historical performance data.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-main">
+                <!-- Brand -->
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="https://placehold.co/32x32/3B82F6/FFF?text=W" alt="Wave Finance Logo">
+                        <span>Wave Finance</span>
+                    </div>
+                    <p class="footer-description">
+                        A next-generation DeFi platform designed to maximize your crypto assets with advanced staking solutions, liquidity provision, and yield optimization strategies.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.11.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.454C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.5 3.61-1.04 5.275-.107.33-.217.624-.35.899-.148.304-.334.514-.625.514-.156 0-.299-.061-.429-.139-.312-.186-.441-.459-.441-.459l.002-.001-.322-.664a21.67 21.67 0 0 1-.193-.324l.009-.01-.004-.004h.008a9.358 9.358 0 0 0 1.041-2.287.952.952 0 0 0 .031-.222.777.777 0 0 0-.281-.544.777.777 0 0 0-.084-.052l-.004.002-.12-.049a.563.563 0 0 0-.22-.045c-.163 0-.372.039-.565.134-.243.116-.523.303-.739.498v-.002s-.178.172-.305.267c-.118.091-.233.18-.314.18-.055 0-.102-.038-.137-.158a1.473 1.473 0 0 1-.047-.299l.001-.001c.026-1.296.111-2.588.23-3.42.092-.63.218-1.026.298-1.163.106-.179.232-.227.42-.175.149.108.341.273.341.273l.006.008c.091.093.226.258.448.508l-.004.004a7.03 7.03 0 0 0 .319.33l.016.014c.153.136.333.277.539.4.186.11.395.193.614.261.256.079.356.128.388.186.032.058.023.14-.009.291l.001-.002-.025.171a.631.631 0 0 0-.031.27.968.968 0 0 0 .129.448c.096.158.223.277.386.346.143.061.386.104.648.104z"/></svg>
+                        </a>
+                        <a href="#" class="social-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.04 0C5.408 0 0 5.408 0 12.04c0 6.628 5.408 12.04 12.04 12.04 6.628 0 12.04-5.408 12.04-12.04C24.08 5.408 18.668 0 12.04 0zm.84 4.88c3.588 0 4.16.012 5.624.084 1.36.06 2.096.288 2.588.48.648.252 1.116.552 1.596 1.032.48.48.78.948 1.032 1.596.192.492.42 1.228.48 2.588.072 1.464.084 2.036.084 5.624 0 3.588-.012 4.16-.084 5.624-.06 1.36-.288 2.096-.48 2.588-.252.648-.552 1.116-1.032 1.596-.48.48-.948.78-1.596 1.032-.492.192-1.228.42-2.588.48-1.464.072-2.036.084-5.624.084-3.588 0-4.16-.012-5.624-.084-1.36-.06-2.096-.288-2.588-.48-.648-.252-1.116-.552-1.596-1.032-.48-.48-.78-.948-1.032-1.596-.192-.492-.42-1.228-.48-2.588-.072-1.464-.084-2.036-.084-5.624 0-3.588.012-4.16.084-5.624.06-1.36.288-2.096.48-2.588.252-.648.552-1.116 1.032-1.596.48-.48.948-.78 1.596-1.032.492-.192 1.228-.42 2.588-.48 1.464-.072 2.036-.084 5.624-.084zm0 2.452c-3.528 0-4.064.012-5.508.084-1.328.06-2.052.276-2.532.468-.636.24-1.092.54-1.572 1.02-.48.48-.78.936-1.02 1.572-.192.48-.408 1.204-.468 2.532-.072 1.444-.084 1.98-.084 5.508s.012 4.064.084 5.508c.06 1.328.276 2.052.468 2.532.24.636.54 1.092 1.02 1.572.48.48.936.78 1.572 1.02.48.192 1.204.408 2.532.468 1.444.072 1.98.084 5.508.084s4.064-.012 5.508-.084c1.328-.06 2.052-.276 2.532-.468.636-.24 1.092-.54 1.572-1.02.48-.48.78-.936 1.02-1.572.192-.48.408-1.204.468-2.532.072-1.444.084-1.98.084-5.508s-.012-4.064-.084-5.508c-.06-1.328-.276-2.052-.468-2.532-.24-.636-.54-1.092-1.02-1.572-.48-.48-.936-.78-1.572-1.02-.48-.192-1.204-.408-2.532-.468-1.444-.072-1.98-.084-5.508-.084zm0 4.164c3.78 0 6.84 3.06 6.84 6.84 0 3.78-3.06 6.84-6.84 6.84-3.78 0-6.84-3.06-6.84-6.84 0-3.78 3.06-6.84 6.84-6.84zm0 11.28c2.448 0 4.44-1.992 4.44-4.44 0-2.448-1.992-4.44-4.44-4.44-2.448 0-4.44 1.992-4.44 4.44 0 2.448 1.992 4.44 4.44 4.44zm8.76-11.544c0 .876-.714 1.596-1.596 1.596-.876 0-1.596-.714-1.596-1.596 0-.876.714-1.596 1.596-1.596.876 0 1.596.714 1.596 1.596z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navigation 1 -->
+                <div class="footer-nav">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="#">Staking</a></li>
+                        <li><a href="#">Liquidity Pools</a></li>
+                        <li><a href="#">Swapping</a></li>
+                        <li><a href="#">Yield Farming</a></li>
+                        <li><a href="#">Token Launch</a></li>
+                    </ul>
+                </div>
+
+                <!-- Navigation 2 -->
+                <div class="footer-nav">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+
+                <!-- Navigation 3 -->
+                <div class="footer-nav">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press Kit</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Partners</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="copyright">
+                    © 2025 Wave Finance. All rights reserved.
+                </div>
+                <div class="legal-links">
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Cookie Policy</a>
+                    <a href="#">Risk Disclosure</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Accordion functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle accordion clicks
+            const accordionItems = document.querySelectorAll('.accordion-item');
+            
+            accordionItems.forEach(item => {
+                const header = item.querySelector('.accordion-header');
+                
+                header.addEventListener('click', () => {
+                    // Toggle current item
+                    item.classList.toggle('open');
+                    
+                    // Close other items (uncomment for single-item only behavior)
+                    // accordionItems.forEach(otherItem => {
+                    //     if (otherItem !== item) {
+                    //         otherItem.classList.remove('open');
+                    //     }
+                    // });
+                });
+            });
+            
+            // Handle MAX button clicks
+            const maxButtons = document.querySelectorAll('.max-btn');
+            
+            maxButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const input = button.closest('.input-wrapper').querySelector('input');
+                    input.value = '1234.56'; // This would be replaced with actual balance in a real app
+                });
+            });
+
+            // Staking animation
+            const stakeButton = document.querySelector('.btn-stake');
+            if (stakeButton) {
+                stakeButton.addEventListener('click', () => {
+                    const amount = document.getElementById('token-amount').value;
+                    if (!amount || isNaN(parseFloat(amount)) || parseFloat(amount) <= 0) {
+                        alert('Please enter a valid amount to stake.');
+                        return;
+                    }
+                    
+                    // Show loading state
+                    const originalText = stakeButton.textContent;
+                    stakeButton.innerHTML = '<div class="loading"><div></div><div></div><div></div><div></div></div>';
+                    stakeButton.disabled = true;
+                    
+                    // Simulate transaction processing
+                    setTimeout(() => {
+                        stakeButton.textContent = 'Success! Tokens Staked';
+                        stakeButton.style.background = 'var(--secondary)';
+                        
+                        // Reset after showing success
+                        setTimeout(() => {
+                            stakeButton.textContent = originalText;
+                            stakeButton.style.background = '';
+                            stakeButton.disabled = false;
+                            document.getElementById('token-amount').value = '';
+                        }, 2000);
+                    }, 2000);
+                });
+            }
+
+            // Animated counter for statistics
+            function animateCounters() {
+                const counters = document.querySelectorAll('.stat-value');
+                
+                counters.forEach(counter => {
+                    const target = parseFloat(counter.textContent.replace(/[^0-9.]/g, ''));
+                    const suffix = counter.textContent.replace(/[0-9.]/g, '');
+                    const decimal = counter.textContent.includes('.');
+                    
+                    let start = 0;
+                    const duration = 1500;
+                    const startTime = performance.now();
+                    
+                    function updateCounter(currentTime) {
+                        const elapsedTime = currentTime - startTime;
+                        const progress = Math.min(elapsedTime / duration, 1);
+                        
+                        // Easing function for smoother animation
+                        const easedProgress = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+                        
+                        let currentValue = easedProgress * target;
+                        
+                        if (decimal) {
+                            counter.textContent = currentValue.toFixed(1) + suffix;
+                        } else {
+                            counter.textContent = Math.floor(currentValue).toLocaleString() + suffix;
+                        }
+                        
+                        if (progress < 1) {
+                            requestAnimationFrame(updateCounter);
+                        }
+                    }
+                    
+                    requestAnimationFrame(updateCounter);
+                });
+            }
+
+            // Observer for scroll animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (entry.target.classList.contains('hero-stats')) {
+                            setTimeout(animateCounters, 500);
+                        }
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            // Observe elements with animations
+            document.querySelectorAll('.animate-fade-in').forEach(el => {
+                observer.observe(el);
+            });
+
+            // Mobile menu toggle (for responsive design)
+            const mobileMenuToggle = document.createElement('div');
+            mobileMenuToggle.className = 'mobile-menu-toggle';
+            mobileMenuToggle.innerHTML = `
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            `;
+            
+            document.querySelector('.header-container').appendChild(mobileMenuToggle);
+            
+            // Add mobile menu functionality
+            mobileMenuToggle.addEventListener('click', () => {
+                const nav = document.querySelector('nav');
+                nav.classList.toggle('mobile-active');
+                mobileMenuToggle.classList.toggle('active');
+            });
+
+            // Simulate chart loading with placeholder
+            const chartContainer = document.querySelector('.chart');
+            if (chartContainer) {
+                // In a real application, this would be replaced with actual chart rendering using
+                // libraries like Chart.js, D3.js or ApexCharts
+            }
+
+            // Add smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

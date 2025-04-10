@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoWave | Markets</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-wrapper">
+        <!-- Header Navigation -->
+        <header class="header">
+            <div class="logo">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 2L30 16L16 30L2 16L16 2Z" fill="url(#paint0_linear)"/>
+                    <path d="M16 7L25 16L16 25L7 16L16 7Z" fill="white"/>
+                    <defs>
+                        <linearGradient id="paint0_linear" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#037ffc"/>
+                            <stop offset="100%" stop-color="#e303fc"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span>CryptoWave</span>
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Dashboard</a></li>
+                    <li class="active"><a href="markets.html">Markets</a></li>
+                    <li><a href="spot.html">Spot</a></li>
+                    <li><a href="future-trading/index.html">Futures</a></li>
+                    <li><a href="staking/staking.html">Staking</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">More</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-controls">
+                <div class="theme-toggle">
+                    <input type="checkbox" id="theme-switch" class="theme-switch">
+                    <label for="theme-switch" class="theme-switch-label">
+                        <span class="theme-icon light"><i class="fas fa-sun"></i></span>
+                        <span class="theme-icon dark"><i class="fas fa-moon"></i></span>
+                    </label>
+                </div>
+                <div class="wallet-connect">
+                    <button class="btn btn-primary">
+                        <span class="btn-icon"><i class="fas fa-wallet"></i></span>
+                        Connect Wallet
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="markets-header">
+                <h1>Markets</h1>
+                <p>Explore all cryptocurrencies available on CryptoWave</p>
+            </div>
+
+            <!-- Markets Filter and Search -->
+            <div class="markets-controls">
+                <div class="markets-search">
+                    <div class="search-input-wrapper">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search coin name or ticker..." id="market-search">
+                        <button class="search-clear" id="clear-search"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+                
+                <div class="markets-view-toggle">
+                    <button class="view-btn active" data-view="all">
+                        <i class="fas fa-table-cells"></i>
+                        <span>All</span>
+                    </button>
+                    <button class="view-btn" data-view="favorites">
+                        <i class="fas fa-star"></i>
+                        <span>Favorites</span>
+                    </button>
+                    <button class="view-btn" data-view="gainers">
+                        <i class="fas fa-arrow-trend-up"></i>
+                        <span>Gainers</span>
+                    </button>
+                    <button class="view-btn" data-view="losers">
+                        <i class="fas fa-arrow-trend-down"></i>
+                        <span>Losers</span>
+                    </button>
+                    <button class="view-btn" data-view="volume">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Volume</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Markets Categories -->
+            <div class="markets-categories">
+                <button class="category-btn active" data-category="all">All</button>
+                <button class="category-btn" data-category="spot">Spot</button>
+                <button class="category-btn" data-category="futures">Futures</button>
+                <button class="category-btn" data-category="defi">DeFi</button>
+                <button class="category-btn" data-category="nft">NFT</button>
+                <button class="category-btn" data-category="metaverse">Metaverse</button>
+                <button class="category-btn" data-category="gamefi">GameFi</button>
+                <button class="category-btn" data-category="ai">AI</button>
+                <button class="category-btn" data-category="layer1">Layer 1</button>
+                <button class="category-btn" data-category="layer2">Layer 2</button>
+            </div>
+
+            <!-- Markets Quote Filter -->
+            <div class="markets-quote-filter">
+                <button class="quote-btn active" data-quote="all">All</button>
+                <button class="quote-btn" data-quote="usdt">USDT</button>
+                <button class="quote-btn" data-quote="btc">BTC</button>
+                <button class="quote-btn" data-quote="eth">ETH</button>
+                <button class="quote-btn" data-quote="usdc">USDC</button>
+            </div>
+
+            <!-- Markets Table -->
+            <div class="markets-table-container">
+                <table class="markets-table">
+                    <thead>
+                        <tr>
+                            <th class="favorite-col"></th>
+                            <th class="asset-col">Asset</th>
+                            <th class="price-col sortable" data-sort="price">Price <i class="fas fa-sort"></i></th>
+                            <th class="change-col sortable" data-sort="change">24h Change <i class="fas fa-sort"></i></th>
+                            <th class="volume-col sortable" data-sort="volume">24h Volume <i class="fas fa-sort"></i></th>
+                            <th class="market-cap-col sortable" data-sort="marketCap">Market Cap <i class="fas fa-sort"></i></th>
+                            <th class="action-col">Trade</th>
+                        </tr>
+                    </thead>
+                    <tbody id="markets-table-body">
+                        <!-- Table rows will be populated by JavaScript -->
+                    </tbody>
+                </table>
+
+                <!-- Loading indicator -->
+                <div class="loading-indicator" id="loading-markets">
+                    <div class="spinner"></div>
+                    <p>Loading markets data...</p>
+                </div>
+
+                <!-- Empty state for search/filters -->
+                <div class="empty-state" id="no-results" style="display: none;">
+                    <i class="fas fa-search"></i>
+                    <h3>No markets found</h3>
+                    <p>Try adjusting your search or filter criteria</p>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="markets-pagination">
+                <button class="pagination-btn" id="prev-page" disabled>
+                    <i class="fas fa-chevron-left"></i> Previous
+                </button>
+                <div class="page-indicators" id="page-indicators">
+                    <!-- Page indicators will be populated by JavaScript -->
+                </div>
+                <button class="pagination-btn" id="next-page">
+                    Next <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16 2L30 16L16 30L2 16L16 2Z" fill="url(#paint0_linear_footer)"/>
+                            <path d="M16 7L25 16L16 25L7 16L16 7Z" fill="white"/>
+                            <defs>
+                                <linearGradient id="paint0_linear_footer" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#037ffc"/>
+                                    <stop offset="100%" stop-color="#e303fc"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span>CryptoWave</span>
+                    </div>
+                    <p>&copy; 2025 CryptoWave. All rights reserved.</p>
+                </div>
+                <div class="footer-right">
+                    <div class="footer-links">
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Support Center</a>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav">
+        <a href="index.html" class="mobile-nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="markets.html" class="mobile-nav-item active">
+            <i class="fas fa-chart-simple"></i>
+            <span>Markets</span>
+        </a>
+        <a href="spot.html" class="mobile-nav-item">
+            <i class="fas fa-arrow-right-arrow-left"></i>
+            <span>Spot</span>
+        </a>
+        <a href="future-trading/index.html" class="mobile-nav-item">
+            <i class="fas fa-chart-line"></i>
+            <span>Futures</span>
+        </a>
+        <a href="#" class="mobile-nav-item">
+            <i class="fas fa-ellipsis"></i>
+            <span>More</span>
+        </a>
+    </div>
+
+    <!-- Quick price info modal -->
+    <div class="quick-info-modal" id="quick-info-modal">
+        <div class="quick-info-content">
+            <div class="quick-info-header">
+                <div class="quick-info-title">
+                    <img src="" alt="" id="quick-info-icon">
+                    <h3 id="quick-info-name"></h3>
+                    <span id="quick-info-symbol"></span>
+                </div>
+                <button class="quick-info-close" id="quick-info-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="quick-info-body">
+                <div class="quick-info-price-section">
+                    <div class="quick-info-price" id="quick-info-price"></div>
+                    <div class="quick-info-change" id="quick-info-change"></div>
+                </div>
+                <div class="quick-info-stats">
+                    <div class="quick-info-stat">
+                        <div class="stat-label">24h High</div>
+                        <div class="stat-value" id="quick-info-high"></div>
+                    </div>
+                    <div class="quick-info-stat">
+                        <div class="stat-label">24h Low</div>
+                        <div class="stat-value" id="quick-info-low"></div>
+                    </div>
+                    <div class="quick-info-stat">
+                        <div class="stat-label">24h Volume</div>
+                        <div class="stat-value" id="quick-info-volume"></div>
+                    </div>
+                    <div class="quick-info-stat">
+                        <div class="stat-label">Market Cap</div>
+                        <div class="stat-value" id="quick-info-market-cap"></div>
+                    </div>
+                </div>
+                <div class="quick-info-actions">
+                    <a href="#" class="btn btn-secondary quick-info-btn" id="quick-info-details">View Details</a>
+                    <a href="#" class="btn btn-primary quick-info-btn" id="quick-info-trade">Trade Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="markets.js"></script>
+</body>
+</html>
